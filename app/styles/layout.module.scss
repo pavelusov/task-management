@@ -43,19 +43,27 @@
   justify-content: center;
   gap: 8px;
   padding: 8px;
-  font-size: calc(10px + 2vmin);
+  font-size: 12px;
+  font-weight: bold;
 }
 
-.link:hover {
-  text-decoration: underline;
-}
+$color: #0c5ee0;
 
 .link {
-  color: #704cb6;
+  color: $color;
+  border: 1px solid $color;
+  padding: 5px 10px;
+  border-radius: 4px
 }
 
 .link.active {
-  text-decoration: underline;
+  background: $color;
+  color: white;
+}
+
+.link:hover {
+  background: $color;
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {

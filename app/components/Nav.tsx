@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import styles from "../styles/layout.module.css";
+import styles from "../styles/layout.module.scss";
 
 export const Nav = () => {
   const pathname = usePathname();
@@ -15,6 +15,12 @@ export const Nav = () => {
         href="/"
       >
         Home
+      </Link>
+      <Link
+        className={`${styles.link} ${pathname === "/tasks" ? styles.active : ""}`}
+        href="/tasks"
+      >
+        Task editor
       </Link>
     </nav>
   );

@@ -8,6 +8,7 @@ import "./styles/globals.css";
 import { dbService } from "@/service/db-service";
 import CssBaseline from '@mui/material/CssBaseline';
 import { Container } from "@mui/material";
+import { Nav } from "@/app/components/Nav";
 
 interface Props {
   readonly children: ReactNode;
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: Props) {
           <body>
             <CssBaseline />
             <Container maxWidth="lg">
+              <Nav />
               {children}
             </Container>
           </body>
