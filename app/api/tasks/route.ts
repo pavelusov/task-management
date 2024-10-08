@@ -45,14 +45,17 @@ export async function POST(req: NextRequest) {
 
     const db = await openDb();
     const userId = session.user.id;
-    const { title } = await req.json();
+    const { title, deadline } = await req.json();
 
     if (!title) {
       return NextResponse.json({ message: 'Task title is required' }, { status: 400 });
     }
 
-    // Вставка новой задачи в базу данных
-    await db.run('INSERT INTO tasks (user_id, title) VALUES (?, ?)', [userId, title]);
+    // Вставка новой задачи с дедлайном (если он указан)
+    await db.run(
+      'INSERT INTO tasks (user_id, title, deadline) VALUES (?, ?, ?)',
+      [userId, title, deadline || null]
+    );
 
     return NextResponse.json({ message: 'Task created successfully' }, { status: 201 });
   } catch (error) {
@@ -72,19 +75,17 @@ export async function PUT(req: NextRequest) {
 
     const db = await openDb();
     const userId = session.user.id;
-    const { id, title, completed } = await req.json();
+    const { id, title, completed, deadline } = await req.json();
 
     if (!id || !title) {
       return NextResponse.json({ message: 'Task ID and title are required' }, { status: 400 });
     }
 
-    // Обновление задачи в базе данных
-    await db.run('UPDATE tasks SET title = ?, completed = ? WHERE id = ? AND user_id = ?', [
-      title,
-      completed ? 1 : 0,
-      id,
-      userId,
-    ]);
+    // Обновление задачи с новым дедлайном (если он указан)
+    await db.run(
+      'UPDATE tasks SET title = ?, completed = ?, deadline = ? WHERE id = ? AND user_id = ?',
+      [title, completed ? 1 : 0, deadline || null, id, userId]
+    );
 
     return NextResponse.json({ message: 'Task updated successfully' }, { status: 200 });
   } catch (error) {

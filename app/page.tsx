@@ -57,10 +57,11 @@ export default function Home() {
       <Typography variant="h5" gutterBottom>Your Tasks</Typography>
 
       {tasks.length > 0 ? (
-        <List>
+        <List >
           {tasks.map((task) => (
-            <ListItem key={task.id}>
+            <ListItem key={task.id} sx={{ borderBottom: '1px solid gray' }}>
               <ListItemText primary={task.title} />
+              <ListItemText primary={new Date(task.deadline).toUTCString()} />
             </ListItem>
           ))}
         </List>

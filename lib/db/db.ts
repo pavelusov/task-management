@@ -25,6 +25,7 @@ export async function initializeDb() {
       user_id INTEGER NOT NULL,
       title TEXT NOT NULL,
       completed BOOLEAN DEFAULT 0,
+      deadline TEXT,
       FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `);
