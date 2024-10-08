@@ -59,7 +59,7 @@ export default function SignIn() {
 
       <Typography variant="body2" sx={{ mt: 2 }}>
         Don't have an account?{' '}
-        <Link href="/auth/signup" underline="hover">
+        <Link href="/auth/signup" style={{ color: '#125aa1', textDecoration: 'underline' }}>
           Register here
         </Link>
       </Typography>
